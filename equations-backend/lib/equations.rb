@@ -41,8 +41,8 @@ class LinearEquation < Equation
   numeric_attr :coefficient_a, :coefficient_b
 
   def initialize(a, b = 0)
-    raise ArgumentError, 'Coefficient A cannot equals to zero' if a.zero?
     self.class.check_arguments! a, b
+    raise ArgumentError, 'Coefficient A cannot equals to zero' if a.zero?
     @coefficient_a = a.to_f
     @coefficient_b = b.to_f
   end
@@ -56,8 +56,8 @@ class QuadraticEquation < Equation
   numeric_attr :coefficient_a, :coefficient_b, :coefficient_c
 
   def initialize(a, b = 0, c = 0)
-    raise ArgumentError, 'Coefficient A cannot equals to zero' if a.zero?
     self.class.check_arguments! a, b, c
+    raise ArgumentError, 'Coefficient A cannot equals to zero' if a.zero?
     @coefficient_a = a.to_f
     @coefficient_b = b.to_f
     @coefficient_c = c.to_f
@@ -65,8 +65,8 @@ class QuadraticEquation < Equation
 
   def solve
     discriminant = @coefficient_b**2 - 4 * @coefficient_a * @coefficient_c
-    return nil if discriminant.negative?
-    return -@coefficient_b / (2 * @coefficient_a) if zero? discriminant
+    return [] if discriminant.negative?
+    return [-@coefficient_b / (2 * @coefficient_a)] if zero? discriminant
 
     sqrt_discriminant = Math.sqrt(discriminant)
     first_root = (-@coefficient_b + sqrt_discriminant) / (2 * @coefficient_a)

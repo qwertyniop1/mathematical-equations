@@ -11,7 +11,7 @@ RSpec.describe 'Server' do
 
       expect(last_response).to be_redirect
       follow_redirect!
-      expect(last_request.url).to eq '/api/v1'
+      expect(last_request.url).to eq 'http://example.org/api/v1'
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe 'Server' do
 
       expect(last_response).to be_redirect
       follow_redirect!
-      expect(last_request.url).to eq '/api/v1'
+      expect(last_request.url).to eq 'http://example.org/api/v1'
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Server' do
       url
       description
       methods
-      params
+      parameters
     ]
 
     context 'with GET request' do
@@ -68,7 +68,7 @@ RSpec.describe 'Server' do
         %w[
           GET
           POST
-          params
+          parameters
           description
           required
           type
@@ -186,13 +186,13 @@ RSpec.describe 'Server' do
         %w[
           GET
           POST
-          params
+          parameters
           description
           required
           type
           coefficient_a
           coefficient_b
-          coefficient_с
+          coefficient_c
         ].each do |word|
           expect(last_response.body).to include word
         end

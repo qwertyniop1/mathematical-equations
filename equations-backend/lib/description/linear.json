@@ -1,0 +1,60 @@
+{
+    "GET": {
+        "description": "Solve linear equation ( a * x + b = 0 )",
+        "parameters": {
+            "coefficient_a": {
+                "type": "number",
+                "description": "Coefficient A of linear equation (cannot equals to zero).",
+                "required": true
+            },
+            "coefficient_b": {
+                "type": "number",
+                "description": "Coefficient B of linear equation.",
+                "required": true
+            }
+        },
+        "example": {
+            "request": "/linear?coefficient_a=2&coefficient_b=-5.5",
+            "response": {
+                "input": {
+                    "coefficient_a": 2,
+                    "coefficient_b": -5.5
+                },
+                "solution": {
+                    "root": 2.75
+                }
+            }
+        }
+    },
+    "POST": {
+        "description": "Solve linear equation ( a * x + b = 0 )",
+        "content-type": "application/json",
+        "parameters": {
+            "coefficient_a": {
+                "type": "number",
+                "description": "Coefficient A of linear equation (cannot equals to zero).",
+                "required": true
+            },
+            "coefficient_b": {
+                "type": "number",
+                "description": "Coefficient B of linear equation.",
+                "required": true
+            }
+        },
+        "example": {
+            "request": {
+                "coefficient_a": 10,
+                "coefficient_b": -15.3
+            },
+            "response": {
+                "input": {
+                    "coefficient_a": 10,
+                    "coefficient_b": -15.3
+                },
+                "solution": {
+                    "root": 1.53
+                }
+            }
+        }
+    }
+}

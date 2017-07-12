@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+    meta content="ie=edge" http-equiv="X-UA-Compatible"
+    title Equations Solver
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    .page
+      nav
+        .wrapper
+          ul.navbar.left
+            li.active
+              = link_to root_path
+                | Equations Solver
+            li
+              = link_to root_path
+                | Linear
+            li
+              = link_to root_path
+                | Quadratic
+            li
+              = link_to about_path
+                | About
+            li
+              = link_to api_path
+                | Api
+          ul.navbar.right
+            li.rigth
+              = link_to root_path
+                | Sign up
+            li.rigth
+              = link_to root_path
+                | Log in
+
+      header.banner
+        img.responsive-img alt=("Equation Solver") src="./images/banner.jpg"
+
+      .wrapper
+        == yield
+
+    footer
+      .wrapper
+        ' &copy; 2017 Vitali Semenyuk, specially for
+        a[href="https://bepaid.by/" target="blank"]
+          | bepaid
+        | .

@@ -3,17 +3,17 @@ section
     h2 Aplication programming interface
     .text.left
       p
-        | Equation Solver provides application programming interface for solving
-        | linear and quadratic equations. Input data accepted both in JSON
-        | format via POST HTTP request and in URL parameters for GET HTTP request.
-        | Response comes only in JSON format.
+        ' Equation Solver provides application programming interface for solving
+        ' linear and quadratic equations. Input data accepted both in JSON
+        ' format via POST HTTP request and in URL parameters for GET HTTP request.
+        ' Response comes only in JSON format.
 section
   .row
     h2 API methods
     p.text
       ' All requests are sent to
-      a href="#"
-        | /api/v1/
+      = link_to '/api/v1'
+        | /api/v1
       |  URL.
     .text.left
       .responsive-table
@@ -40,24 +40,13 @@ section
               td coefficient_a (number), coefficient_b (number)
               td -
               td.code rowspan="2"
-                | {
-                | "input": {
-                | "coefficient_a": 2,
-                | "coefficient_b": -5.5
-                | },
-                | "solution": {
-                | "root": 2.75
-                | }
-                | }
+                = "{\n\t\"input\": {\n\t\t\"coefficient_a\": 2,\n\t\t\"coefficient_b\": -5.5\n\t},\n\t\"solution\": {\n\t\t\"root\": 2.75\n\t}\n}"
               td rowspan="2"  Solve linear equation
             tr
               td POST
               td -
               td.code
-                | {
-                | "coefficient_a": 10,
-                | "coefficient_b": -15.3
-                | }
+                = "{\n\t\"coefficient_a\": 10,\n\t\"coefficient_b\": -15.3\n}"
             tr
               td rowspan="2"
                 | /quadratic
@@ -65,38 +54,17 @@ section
               td coefficient_a (number), coefficient_b (number), coefficient_c (number)
               td -
               td.code rowspan="2"
-                | {
-                | "input": {
-                | "coefficient_a": 1,
-                | "coefficient_b": -8,
-                | "coefficient_c": 7
-                | },
-                | "solution": {
-                | "roots": [
-                | 7,
-                | 1
-                | ],
-                | "quantity": 2
-                | }
-                | }
+                = "{\n\t\"input\": {\n\t\t\"coefficient_a\": 1,\n\t\t\"coefficient_b\": -8,\n\t\t\"coefficient_c\": 7\n\t},\n\t\"solution\": {\n\t\t\"roots\": [\n\t\t\t7,\n\t\t\t1\n\t\t],\n\t\t\"quantity\": 2\n\t}\n}"
               td rowspan="2"  Solve quadratic equation
             tr
               td POST
               td -
               td.code
-                | {
-                | "coefficient_a": 2,
-                | "coefficient_b": 5,
-                | "coefficient_c": -19
-                | }
+                = "{\n\t\"coefficient_a\": 2,\n\t\"coefficient_b\": 5,\n\t\"coefficient_c\": -19\n}"
 section
   .row
     h2 Error responses
     .text.left
       p Errors occured during interaction with API have following format:
       p.code
-        | {
-        | "errors": {
-        | "reason": "description"
-        | }
-        | }
+        = "{\n\t\"errors\": {\n\t\t\"reason\": \"description\"\n\t}\n}"

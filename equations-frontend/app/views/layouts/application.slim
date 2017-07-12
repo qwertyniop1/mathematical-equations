@@ -28,7 +28,7 @@ html
               = link_to about_path
                 | About
             li
-              = link_to api_path
+              = link_to developers_path
                 | Api
           ul.navbar.right
             li.rigth
@@ -39,7 +39,7 @@ html
                 | Log in
 
       header.banner
-        img.responsive-img alt=("Equation Solver") src="./images/banner.jpg"
+        = image_tag 'banner.jpg', class: 'responsive-img', alt: 'Equation Solver'
 
       .wrapper
         == yield
@@ -47,6 +47,6 @@ html
     footer
       .wrapper
         ' &copy; 2017 Vitali Semenyuk, specially for
-        a[href="https://bepaid.by/" target="blank"]
+        = link_to 'https://bepaid.by/', target: :blank
           | bepaid
         | .

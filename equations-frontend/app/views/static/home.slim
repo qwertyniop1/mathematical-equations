@@ -4,9 +4,9 @@ section
     .text.left
       p
         strong Equations Solver
-        |  &ndash; is a essential tool for solving different types
-        | of equations. With the help of our service you can quickly get mathematical
-        | solution of linear and quadratic equations in convinient and user friendly format.
+        '  &ndash; is a essential tool for solving different types
+        ' of equations. With the help of our service you can quickly get mathematical
+        ' solution of linear and quadratic equations in convinient and user friendly format.
 section
   .row
     h2 Choose equation type
@@ -14,10 +14,12 @@ section
     .panel
       h3 Linear
       a href="#"
-        img alt=("Linear equation") height="250" src="./images/linear.png" width="250" /
-      p a*x+b=0
+        = image_tag 'linear.png', alt: 'Linear equation', height: 250, width: 250
+      p
+        | a*x+b=0
     .panel
       h3 Quadratic
       a href="#"
-        img alt=("Quadratic equation") height="250" src="./images/quadratic.png" width="250" /
-      p a*x^2+b*x+c=0
+        = image_tag 'quadratic.png', alt: 'Linear equation', height: 250, width: 250
+      p
+        | a*x^2+b*x+c=0

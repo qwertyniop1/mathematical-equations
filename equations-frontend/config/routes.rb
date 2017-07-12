@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   scope 'equations', controller: :equations do
     get 'linear', as: :linear
+    post 'linear', as: :solve_linear, action: :solve_linear
+
     get 'quadratic', as: :quadratic
+    post 'quadratic', as: :solve_quadratic, action: :solve_quadratic
   end
 end

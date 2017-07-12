@@ -15,20 +15,21 @@ section
         ' linear coefficient and the constant or free term.
 section
   .row
-    form.form action="/" method="post"
+    = form_with class: 'form' do |f|
       .input-group
         .label
           label for="coefficient_a"  Coefficient A
-        input autocomplete="off" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
+        input id="coefficient_a" autocomplete="off" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
       .input-group
         .label
           label for="coefficient_b"  Coefficient B
-        input autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
+        input id="coefficient_b" autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
       .input-group
         .label
           label for="coefficient_c"  Coefficient C
-        input autocomplete="off" name="coefficient_c" placeholder=("Enter value") required="" type="number" /
-      input type="submit" value="Solve" /
+        input id="coefficient_c" autocomplete="off" name="coefficient_c" placeholder=("Enter value") required="" type="number" /
+      = f.submit 'Solve', data: { "disable-with": "Solving..." }
+
 
 section
   .row

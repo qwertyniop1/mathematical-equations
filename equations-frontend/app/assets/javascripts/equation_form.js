@@ -1,6 +1,7 @@
 document.addEventListener('turbolinks:load', () => {
     const expression = document.querySelector('.equation__input');
     const inputs = document.querySelectorAll('.form input[type=number]');
+    const form = document.querySelector('.form');
 
     inputs.forEach(input => input.addEventListener('change', (event) => {
         expression.innerHTML = getNewExpression(inputs);
@@ -10,16 +11,25 @@ document.addEventListener('turbolinks:load', () => {
         validate(event.target);
     }));
 
-    document.querySelector('.form').addEventListener('submit', (e) => {
-        const coefficientA = document.getElementById('coefficient_a');
-        if (coefficientA.value === '0') {
-            alert('Coefficient A cannot equals to 0!');
-            e.preventDefault();
-            return;
-        }
-        e.preventDefault();
-    });
+    if (form) {
+        form.querySelector('input[type=submit').addEventListener('click', (event) => {
+            const coefficient_a = document.getElementById('coefficient_a');
+            if (coefficient_a.value === '0') {
+                event.preventDefault();
+                coefficient_a.classList.add('error');
+            } else {
+                coefficient_a.classList.remove('error');
+            }
+        });
+    }
+});
 
+document.addEventListener('ajax:send', (event, xhr, options) => {
+    document.querySelector('.fade').classList.remove('hidden');
+});
+
+document.addEventListener('ajax:complete', (event, xhr, status) => {
+    document.querySelector('.fade').classList.add('hidden');
 });
 
 const getNewExpression = (inputs) => {

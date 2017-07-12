@@ -17,7 +17,7 @@ section
         ' parameters may depend on the problem.
 section
   .row
-    = form_tag nil, class: 'form'
+    = form_with class: 'form' do |f|
       .input-group
         .label
           label for="coefficient_a"  Coefficient A
@@ -26,7 +26,7 @@ section
         .label
           label for="coefficient_b"  Coefficient B
         input id="coefficient_b" autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
-      input type="submit" value="Solve" /
+      = f.submit 'Solve', data: { "disable-with": "Solving..." }
 
 section
   .row

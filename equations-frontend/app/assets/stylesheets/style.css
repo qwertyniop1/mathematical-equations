@@ -47,6 +47,7 @@ a:hover {
 
 .page {
     min-height: 100%;
+    margin-top: 45px;
     padding-bottom: 50px;
 }
 
@@ -56,8 +57,12 @@ a:hover {
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
     background-color: #70c1b3;
     font-size: 0;
+    z-index: 10000;
 }
 
 ul.navbar {
@@ -103,6 +108,10 @@ ul.navbar:last-child {
 }
 
 @media screen and (max-width: 700px){
+    nav {
+        position: static;
+    }
+
     ul.navbar {
         width: 100% !important;
     }

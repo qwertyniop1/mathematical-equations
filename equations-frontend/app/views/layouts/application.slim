@@ -4,7 +4,9 @@ html
     meta charset="UTF-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
     meta content="ie=edge" http-equiv="X-UA-Compatible"
-    title Equations Solver
+    title
+      = full_title(yield :title)
+
     = csrf_meta_tags
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -14,33 +16,32 @@ html
     = favicon_link_tag 'apple-touch-favicon.ico', rel: 'apple-touch-icon'
 
   body
+    nav
+      .wrapper
+        ul.navbar.left
+          li.active
+            = link_to root_path
+              | Equations Solver
+          li
+            = link_to linear_path
+              | Linear
+          li
+            = link_to quadratic_path
+              | Quadratic
+          li
+            = link_to about_path
+              | About
+          li
+            = link_to api_path
+              | Api
+        ul.navbar.right
+          li.rigth
+            = link_to root_path
+              | Sign up
+          li.rigth
+            = link_to root_path
+              | Log in
     .page
-      nav
-        .wrapper
-          ul.navbar.left
-            li.active
-              = link_to root_path
-                | Equations Solver
-            li
-              = link_to linear_path
-                | Linear
-            li
-              = link_to quadratic_path
-                | Quadratic
-            li
-              = link_to about_path
-                | About
-            li
-              = link_to api_path
-                | Api
-          ul.navbar.right
-            li.rigth
-              = link_to root_path
-                | Sign up
-            li.rigth
-              = link_to root_path
-                | Log in
-
       header.banner
         = image_tag 'banner.jpg', class: 'responsive-img', alt: 'Equation Solver'
 

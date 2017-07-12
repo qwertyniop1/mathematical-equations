@@ -19,19 +19,19 @@ html
     nav
       .wrapper
         ul.navbar.left
-          li.active
+          li class=(active_link root_path)
             = link_to root_path
               | Equations Solver
-          li
+          li class=(active_link linear_path)
             = link_to linear_path
               | Linear
-          li
+          li class=(active_link quadratic_path)
             = link_to quadratic_path
               | Quadratic
-          li
+          li class=(active_link about_path)
             = link_to about_path
               | About
-          li
+          li class=(active_link api_path)
             = link_to api_path
               | Api
         ul.navbar.right

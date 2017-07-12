@@ -19,7 +19,7 @@ section
       .input-group
         .label
           label for="coefficient_a"  Coefficient A
-        input autocomplete="off" autofocus="" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
+        input autocomplete="off" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
       .input-group
         .label
           label for="coefficient_b"  Coefficient B
@@ -29,3 +29,10 @@ section
           label for="coefficient_c"  Coefficient C
         input autocomplete="off" name="coefficient_c" placeholder=("Enter value") required="" type="number" /
       input type="submit" value="Solve" /
+
+section
+  .row
+    .equation
+      .equation__input
+        | `0x^2+0x+0=0`
+      .equation__solution

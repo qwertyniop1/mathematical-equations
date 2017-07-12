@@ -17,13 +17,20 @@ section
         ' parameters may depend on the problem.
 section
   .row
-    form.form action="/" method="post"
+    = form_tag nil, class: 'form'
       .input-group
         .label
           label for="coefficient_a"  Coefficient A
-        input autocomplete="off" autofocus="" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
+        input id="coefficient_a" autocomplete="off" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
       .input-group
         .label
           label for="coefficient_b"  Coefficient B
-        input autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
+        input id="coefficient_b" autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
       input type="submit" value="Solve" /
+
+section
+  .row
+    .equation
+      .equation__input
+        | `0x+0=0`
+      .equation__solution

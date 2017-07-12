@@ -228,7 +228,7 @@ footer {
 }
 
 .form .input-group:last-of-type {
-    margin: 30px 0;
+    margin-bottom: 30px;
 }
 
 .form input {

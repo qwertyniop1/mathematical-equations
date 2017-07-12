@@ -13,13 +13,13 @@ section
   .row.flex
     .panel
       h3 Linear
-      a href="#"
+      = link_to linear_path
         = image_tag 'linear.png', alt: 'Linear equation', height: 250, width: 250
       p
-        | a*x+b=0
+        | `a*x+b=0`
     .panel
       h3 Quadratic
-      a href="#"
+      = link_to quadratic_path
         = image_tag 'quadratic.png', alt: 'Linear equation', height: 250, width: 250
       p
-        | a*x^2+b*x+c=0
+        | `a*x^2+b*x+c=0`

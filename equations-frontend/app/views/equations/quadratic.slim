@@ -1,0 +1,29 @@
+section
+  .row
+    h2 Quadratic equation
+    .text.left
+      p
+        ' In algebra, a
+        strong
+          ' quadratic equation
+        ' is any equation having the form `ax^2+bx+c=0`
+        ' where `x` represents an unknown, and `a`, `b`, and `c` represent known numbers such that `a` is not equal to 0.
+        ' If `a = 0`, then the equation is linear, not quadratic. The numbers `a`, `b`, and `c` are the coefficients of
+        ' the equation, and may be distinguished by calling them, respectively, the quadratic coefficient, the
+        ' linear coefficient and the constant or free term.
+section
+  .row
+    form.form action="/" method="post"
+      .input-group
+        .label
+          label for="coefficient_a"  Coefficient A
+        input autocomplete="off" autofocus="" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
+      .input-group
+        .label
+          label for="coefficient_b"  Coefficient B
+        input autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
+      .input-group
+        .label
+          label for="coefficient_c"  Coefficient C
+        input autocomplete="off" name="coefficient_c" placeholder=("Enter value") required="" type="number" /
+      input type="submit" value="Solve" /

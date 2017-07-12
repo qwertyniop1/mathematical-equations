@@ -10,6 +10,9 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
+    = favicon_link_tag 'favicon.ico'
+    = favicon_link_tag 'apple-touch-favicon.ico', rel: 'apple-touch-icon'
+
   body
     .page
       nav
@@ -19,16 +22,16 @@ html
               = link_to root_path
                 | Equations Solver
             li
-              = link_to root_path
+              = link_to linear_path
                 | Linear
             li
-              = link_to root_path
+              = link_to quadratic_path
                 | Quadratic
             li
               = link_to about_path
                 | About
             li
-              = link_to developers_path
+              = link_to api_path
                 | Api
           ul.navbar.right
             li.rigth

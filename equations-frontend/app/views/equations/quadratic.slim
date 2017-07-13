@@ -1,39 +1,11 @@
 - provide :title, 'Quadratic equations'
 
-section
-  .row
-    h2 Quadratic equation
-    .text.left
-      p
-        ' In algebra, a
-        strong
-          ' quadratic equation
-        ' is any equation having the form `ax^2+bx+c=0`
-        ' where `x` represents an unknown, and `a`, `b`, and `c` represent known numbers such that `a` is not equal to 0.
-        ' If `a = 0`, then the equation is linear, not quadratic. The numbers `a`, `b`, and `c` are the coefficients of
-        ' the equation, and may be distinguished by calling them, respectively, the quadratic coefficient, the
-        ' linear coefficient and the constant or free term.
-section
-  .row
-    = form_with class: 'form' do |f|
-      .input-group
-        .label
-          label for="coefficient_a"  Coefficient A
-        input id="coefficient_a" autocomplete="off" name="coefficient_a" placeholder=("Enter value") required="" type="number" /
-      .input-group
-        .label
-          label for="coefficient_b"  Coefficient B
-        input id="coefficient_b" autocomplete="off" name="coefficient_b" placeholder=("Enter value") required="" type="number" /
-      .input-group
-        .label
-          label for="coefficient_c"  Coefficient C
-        input id="coefficient_c" autocomplete="off" name="coefficient_c" placeholder=("Enter value") required="" type="number" /
-      = f.submit 'Solve', data: { "disable-with": "Solving..." }
-
-
-section
-  .row
-    .equation
-      .equation__input
-        | `0x^2+0x+0=0`
-      .equation__solution
+= render 'equation', type: :quadratic, fields: ['coefficient_a', 'coefficient_b', 'coefficient_c'] do
+  ' In algebra, a
+  strong
+    ' quadratic equation
+  ' is any equation having the form `ax^2+bx+c=0`
+  ' where `x` represents an unknown, and `a`, `b`, and `c` represent known numbers such that `a` is not equal to 0.
+  ' If `a = 0`, then the equation is linear, not quadratic. The numbers `a`, `b`, and `c` are the coefficients of
+  ' the equation, and may be distinguished by calling them, respectively, the quadratic coefficient, the
+  ' linear coefficient and the constant or free term.

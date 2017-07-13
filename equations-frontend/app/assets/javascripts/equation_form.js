@@ -14,14 +14,21 @@ document.addEventListener('turbolinks:load', () => {
     if (form) {
         form.querySelector('input[type=submit').addEventListener('click', (event) => {
             const coefficient_a = document.getElementById('coefficient_a');
+            const errors = document.querySelector('.equation__error');
+
             if (coefficient_a.value === '0') {
                 event.preventDefault();
                 coefficient_a.classList.add('error');
+                errors.innerHTML = 'Coefficient A cannot equals to 0.'
+                errors.classList.remove('hidden');
             } else {
                 coefficient_a.classList.remove('error');
+                errors.classList.add('hidden');
             }
         });
     }
+
+    expression.innerHTML = getNewExpression(inputs);
 });
 
 document.addEventListener('ajax:send', (event, xhr, options) => {

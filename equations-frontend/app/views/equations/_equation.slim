@@ -1,0 +1,27 @@
+section
+  .row
+    h2
+      = type.capitalize
+      '
+      | equation
+    .text.left
+      p
+        == yield
+
+section
+  .row
+    = form_with class: 'form' do |f|
+      - fields.each do |field|
+        .input-group
+          .label
+            label (for=field)
+              = field.humanize
+          input id=(field) autocomplete="off" name=(field) placeholder=("Enter value") required="" type="number" /
+      = f.submit 'Solve', data: { "disable-with": "Solving..." }
+
+section
+  .row
+    .equation
+      .equation__error.hidden
+      .equation__input
+      .equation__solution

@@ -339,3 +339,12 @@ footer {
     font-size: 4rem;
     line-height: 120px;
 }
+
+.equation__error {
+    background-color: #9c3848;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 32px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}

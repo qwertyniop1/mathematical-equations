@@ -16,7 +16,7 @@ section
           .label
             label (for=field)
               = field.humanize
-          input id=(field) autocomplete="off" name=(field) placeholder=("Enter value") required="" type="number" /
+          input id=(field) autocomplete="off" name=(field) placeholder=("Enter value") required="" type="number" step="any"
       = f.submit 'Solve', data: { "disable-with": "Solving..." }
 
 section

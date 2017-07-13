@@ -1,5 +1,5 @@
 const getNewExpression = (inputs) => {
-    const [a, b, c] = [].map.call(inputs, input => input.value || 0);
+    const [a, b, c] = [].map.call(inputs, input => parseFloat(input.value) || 0);
     if (inputs.length === 3) {
         return `\`${a}*x^2${numberWithSign(b)}*x${numberWithSign(c)}=0\``;
     }
@@ -57,16 +57,16 @@ document.addEventListener('turbolinks:load', () => {
     errors.init('.equation__error');
 
     if (form) {
-        form.querySelector('input[type=submit').addEventListener('click', (event) => {
-            const coefficient_a = document.getElementById('coefficient_a');
+        form.querySelector('input[type=submit]').addEventListener('click', (event) => {
+            const coefficientA = document.getElementById('coefficient_a');
 
-            if (coefficient_a.value === '0') {
+            if (!parseFloat(coefficientA.value)) {
                 event.preventDefault();
-                coefficient_a.classList.add('error');
+                coefficientA.classList.add('error');
                 errors.show('Coefficient A cannot equals to 0.');
 
             } else {
-                coefficient_a.classList.remove('error');
+                coefficientA.classList.remove('error');
                 errors.hide();
             }
         });

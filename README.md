@@ -2,6 +2,33 @@
 
 ### Test task for [bePaid](https://bepaid.by/) job application.
 
+### Requirements
+Ruby 2.4.0
+NodeJS
+
+### Install
+```
+git clone https://github.com/qwertyniop1/mathematical-equations.git
+cd mathematical-equations
+
+cd equations-backend
+bundle install
+
+cd ../equations-frontend
+bundle install
+```
+
+### Run
+```
+cd equations-backend
+bundle exec ruby lib/server.rb
+
+cd ../equations-frontend
+rails server
+```
+
+### Task description
+
 The system should contain 2 main components: frontend and backend servers
 1. **Front-end server requirements**
 RoR application must provide:
@@ -31,6 +58,8 @@ response in friendly format
 * Class inheritance to provide single object interface for solving various
 types of equations
 * Authentication for accessing backend server
+
+### Contacts
 
 Семенюк Виталий
 - svitas1997@gmail.com

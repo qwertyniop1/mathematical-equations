@@ -327,6 +327,7 @@ footer {
 }
 
 .equation {
+    position: relative;
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
@@ -341,10 +342,20 @@ footer {
 }
 
 .equation__error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: #9c3848;
     color: #fff;
     font-size: 1.6rem;
     line-height: 32px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.equation__error.visible {
+    opacity: 1;
 }

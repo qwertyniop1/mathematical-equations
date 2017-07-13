@@ -1,0 +1,10 @@
+- if @result.any?
+  table.table
+    - @result.each_with_index do |root, index|
+      tr
+        td
+          = @result.size > 1 ? "`x#{index + 1}`" : '`x`'
+        td
+          = root
+- else
+  p.text No roots

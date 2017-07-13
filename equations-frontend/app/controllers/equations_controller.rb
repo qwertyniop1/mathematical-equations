@@ -25,9 +25,11 @@ class EquationsController < ApplicationController
 
   private
 
-  def equation_params(quadratic = false)
-    required_params = [:coefficient_a, :coefficient_b]
-    required_params << :coefficient_c if quadratic
-    params.require(required_params)
+  def equation_params
+    %i(
+      coefficient_a
+      coefficient_b
+      coefficient_c
+    ).reduce({}) { |hash, key| hash.update(key => params[key]) }
   end
 end

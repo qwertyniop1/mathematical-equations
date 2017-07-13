@@ -1,1 +1,1 @@
-document.querySelector('.equation__solution').innerHTML = <%= escape_javascript(@result.to_s) %>
+document.querySelector('.equation__solution').innerHTML = '<%= escape_javascript(render 'solution') %>'

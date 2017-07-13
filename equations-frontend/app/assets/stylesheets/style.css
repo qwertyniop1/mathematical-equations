@@ -359,3 +359,11 @@ footer {
 .equation__error.visible {
     opacity: 1;
 }
+
+.equation__solution table {
+    width: 100%;
+}
+
+.equation__solution td {
+    padding: 25px 10px;
+}

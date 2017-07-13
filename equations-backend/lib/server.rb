@@ -17,6 +17,8 @@ end
 require_relative 'equations'
 require_relative 'api_description'
 
+set port: 8080
+
 helpers do
   def errors
     @errors ||= {}

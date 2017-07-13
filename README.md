@@ -3,8 +3,8 @@
 ### Test task for [bePaid](https://bepaid.by/) job application.
 
 ### Requirements
-Ruby 2.4.0
-NodeJS
+* Ruby 2.4.0
+* NodeJS
 
 ### Install
 ```
@@ -16,6 +16,15 @@ bundle install
 
 cd ../equations-frontend
 bundle install
+```
+
+### Test
+```
+cd equations-backend
+rspec
+
+cd ../equations-frontend
+rspec
 ```
 
 ### Run

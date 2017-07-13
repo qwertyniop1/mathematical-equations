@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+    meta content="ie=edge" http-equiv="X-UA-Compatible"
+    title
+      = full_title(yield :title)
+
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    = favicon_link_tag 'favicon.ico'
+    = favicon_link_tag 'apple-touch-favicon.ico', rel: 'apple-touch-icon'
+
+  body
+    nav
+      .wrapper
+        ul.navbar.left
+          li class=(active_link root_path)
+            = link_to root_path
+              | Equations Solver
+          li class=(active_link linear_path)
+            = link_to linear_path
+              | Linear
+          li class=(active_link quadratic_path)
+            = link_to quadratic_path
+              | Quadratic
+          li class=(active_link about_path)
+            = link_to about_path
+              | About
+          li class=(active_link api_path)
+            = link_to api_path
+              | Api
+        ul.navbar.right
+          li.rigth
+            = link_to root_path
+              | Sign up
+          li.rigth
+            = link_to root_path
+              | Log in
+    .page
+      header.banner
+        = image_tag 'banner.jpg', class: 'responsive-img', alt: 'Equation Solver'
+
+      .wrapper
+        == yield
+
+    footer
+      .wrapper
+        ' &copy; 2017 Vitali Semenyuk, specially for
+        = link_to 'https://bepaid.by/', target: :blank
+          | bepaid
+        | .
+
+    .fade.hidden
+      .spinner

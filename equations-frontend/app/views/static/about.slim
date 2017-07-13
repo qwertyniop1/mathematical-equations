@@ -1,0 +1,52 @@
+- provide :title, 'About'
+
+section
+  .row
+    h2 About project
+    .text.left
+      p
+        strong Equations Solver
+        ' &ndash; is a essential tool for solving different types
+        ' of equations. With the help of our service you can quickly get mathematical
+        ' solution of linear and quadratic equations in convinient and user friendly format.
+section
+  .row
+    h2 About technologies
+    .text.left
+      p
+        ' The service consist of 2 parts:
+        = link_to api_path
+          ' API
+        ' server written with Sinatra
+        ' and frontend web server written with Ruby on Rails. Source code has good tests
+        ' coverage (with RSpec library). Web site's layout is written in pure CSS3. Ajax
+        ' is used for asynchronic requests.
+section
+  .row
+    h2 About author
+    .text.left
+      p
+        ' My name is
+        strong Vitali Semenyuk
+        ' .
+        ' I am 19, currently live and study in Minsk.
+        ' I'm study in Belarussian State University of Informatics and Radioelectronics at the
+        ' Faculty of computer systems and networks. I found of programming and learn by myself
+        ' such languages as Python, javascript and Ruby, web layout (HTML5, CSS3), SQL
+        ' (experience with MySQL). I have deep knowledge in Object oriented programming,
+        ' design patterns, alghoritms and data structures.
+      p
+        br/
+        strong Contacts:
+        br/
+        ' Email:
+        = link_to 'mailto:svitas1997@gmail.com'
+          | svitas1997@gmail.com
+        br/
+        ' Linkedin:
+        = link_to 'https://www.linkedin.com/in/vitali-semenyuk/', target: :blank
+          | https://www.linkedin.com/in/vitali-semenyuk/
+        br/
+        ' Github:
+        = link_to 'https://github.com/qwertyniop1', target: :blank
+          | https://github.com/qwertyniop1

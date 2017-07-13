@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title)
-    base_title = 'Equations solver'
+    base_title = 'Equations Solver'
     if page_title.empty?
       base_title
     else

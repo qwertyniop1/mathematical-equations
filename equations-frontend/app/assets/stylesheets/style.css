@@ -73,10 +73,13 @@ a:hover {
 
 .spinner {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
     height: 150px;
     width: 150px;
+    margin: auto;
     border: 16px solid #b2b2b2;
     border-top: 16px solid #247ba0;
     border-radius: 50%;
@@ -137,24 +140,6 @@ ul.navbar:last-child {
 .navbar li.active a {
     background-color: #247BA0;
     border-radius: 5px;
-}
-
-@media screen and (max-width: 700px){
-    nav {
-        position: static;
-    }
-
-    ul.navbar {
-        width: 100% !important;
-    }
-
-    .navbar li {
-        display: block;
-    }
-
-    .banner {
-        display: none;
-    }
 }
 
 .left {
@@ -362,8 +347,36 @@ footer {
 
 .equation__solution table {
     width: 100%;
+    font-size: 3rem;
 }
 
 .equation__solution td {
     padding: 25px 10px;
+}
+
+
+@media screen and (max-width: 700px){
+    nav {
+        position: static;
+    }
+
+    ul.navbar {
+        width: 100% !important;
+    }
+
+    .navbar li {
+        display: block;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    .equation__input {
+        font-size: 2rem;
+    }
+
+    .equation__solution table {
+        font-size: 2rem;
+    }
 }

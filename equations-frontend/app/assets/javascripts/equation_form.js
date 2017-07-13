@@ -1,9 +1,9 @@
 const getNewExpression = (inputs) => {
     const [a, b, c] = [].map.call(inputs, input => input.value || 0);
     if (inputs.length === 3) {
-        return `\`${a}x^2${numberWithSign(b)}x${numberWithSign(c)}=0\``;
+        return `\`${a}*x^2${numberWithSign(b)}*x${numberWithSign(c)}=0\``;
     }
-    return `\`${a}x${numberWithSign(b)}=0\``;
+    return `\`${a}*x${numberWithSign(b)}=0\``;
 };
 
 const numberWithSign = number => number >= 0 ? `+${number}` : `${number}`;
@@ -33,6 +33,12 @@ const errors = {
     },
 };
 
+const renderFormulas = (target) => {
+    if (typeof MathJax !== 'undefined') {
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, target]);
+    }
+};
+
 
 document.addEventListener('turbolinks:load', () => {
     const expression = document.querySelector('.equation__input');
@@ -41,6 +47,7 @@ document.addEventListener('turbolinks:load', () => {
 
     inputs.forEach(input => input.addEventListener('change', (event) => {
         expression.innerHTML = getNewExpression(inputs);
+        renderFormulas(expression);
     }));
 
     inputs.forEach(input => input.addEventListener('input', (event) => {
@@ -66,6 +73,8 @@ document.addEventListener('turbolinks:load', () => {
 
         expression.innerHTML = getNewExpression(inputs);
     }
+
+    renderFormulas(document.body);
 });
 
 document.addEventListener('ajax:send', (event, xhr, options) => {
@@ -78,4 +87,9 @@ document.addEventListener('ajax:complete', (event, xhr, status) => {
 
 document.addEventListener('ajax:error', (event, xhr, status) => {
     errors.show('Server error occured. Please, try again later.')
+});
+
+document.addEventListener('ajax:success', (event, xhr, status) => {
+    const solution = document.querySelector('.equation__solution');
+    renderFormulas(solution);
 });

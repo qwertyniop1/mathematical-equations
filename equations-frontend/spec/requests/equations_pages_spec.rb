@@ -55,7 +55,7 @@ RSpec.describe 'EquationPages', type: :request do
         before do
           fill_in 'coefficient_a', with: '1'
           fill_in 'coefficient_b', with: '-10'
-          fill_in 'coefficient_b', with: '25'
+          fill_in 'coefficient_c', with: '25'
           click_button 'Solve'
         end
 

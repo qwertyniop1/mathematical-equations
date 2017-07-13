@@ -48,9 +48,9 @@ RSpec.describe 'StaticPages', type: :request do
     expect(page).to have_title(full_title 'Linear equations')
     click_link 'Quadratic'
     expect(page).to have_title(full_title 'Quadratic equations')
-    click_link 'Sign up'
-    expect(page).to have_title(full_title 'Sign up')
-    click_link 'Sign in'
-    expect(page).to have_title(full_title 'Sign in')
+    # click_link 'Sign up'
+    # expect(page).to have_title(full_title 'Sign up')
+    # click_link 'Sign in'
+    # expect(page).to have_title(full_title 'Sign in')
   end
 end

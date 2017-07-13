@@ -8,6 +8,7 @@ class EquationsController < ApplicationController
     @result = EquationsAPI.new(equation_params).linear
 
     respond_to do |format|
+      format.html { render :linear }
       format.js { render :solve_equation }
     end
   end
@@ -19,6 +20,7 @@ class EquationsController < ApplicationController
     @result = EquationsAPI.new(equation_params).quadratic
 
     respond_to do |format|
+      format.html { render :quadratic }
       format.js { render :solve_equation }
     end
   end

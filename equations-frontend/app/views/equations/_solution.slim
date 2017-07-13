@@ -1,12 +1,13 @@
-- if @result.any?
-  table.table
-    col style=("width: 40%")
-    col style=("width: 60%")
-    - @result.each_with_index do |root, index|
-      tr
-        td.right
-          = @result.size > 1 ? "`x#{index + 1}`" : '`x`'
-        td
-          = "`#{root.round(10)}`"
-- else
-  p.text No roots
+- unless @result.nil?
+  - if @result.any?
+    table.table
+      col style=("width: 40%")
+      col style=("width: 60%")
+      - @result.each_with_index do |root, index|
+        tr
+          td.right
+            = @result.size > 1 ? "`x#{index + 1}`" : '`x`'
+          td
+            = "`#{root.round(10)}`"
+  - else
+    p.text No roots

@@ -1,0 +1,44 @@
+{
+    "version": "1.0",
+    "api": {
+        "linear": {
+            "url": "/api/v1/linear",
+            "description": "API endpoind for solving linear equations ( a * x + b = 0 )",
+            "methods": ["GET", "POST"],
+            "parameters": {
+                "coefficient_a": {
+                    "type": "number",
+                    "description": "Coefficient A of linear equation (cannot equals to zero).",
+                    "required": true
+                },
+                "coefficient_b": {
+                    "type": "number",
+                    "description": "Coefficient B of linear equation.",
+                    "required": true
+                }
+            }
+        },
+        "quadratic": {
+            "url": "/api/v1/quadratic",
+            "description": "API endpoind for solving quadratic equations ( a * x^2 + b * x + c = 0 )",
+            "methods": ["GET", "POST"],
+            "parameters": {
+                "coefficient_a": {
+                    "type": "number",
+                    "description": "Coefficient A of quadratic equation (cannot equals to zero).",
+                    "required": true
+                },
+                "coefficient_b": {
+                    "type": "number",
+                    "description": "Coefficient B of quadratic equation.",
+                    "required": true
+                },
+                "coefficient_c": {
+                    "type": "number",
+                    "description": "Coefficient C of quadratic equation.",
+                    "required": true
+                }
+            }
+        }
+    }
+}

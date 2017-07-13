@@ -1,0 +1,81 @@
+{
+    "GET": {
+        "description": "Solve quadratic equation ( a * x^2 + b * x + c = 0 )",
+        "parameters": {
+            "coefficient_a": {
+                "type": "number",
+                "description": "Coefficient A of quadratic equation (cannot equals to zero).",
+                "required": true
+            },
+            "coefficient_b": {
+                "type": "number",
+                "description": "Coefficient B of quadratic equation.",
+                "required": true
+            },
+            "coefficient_c": {
+                "type": "number",
+                "description": "Coefficient C of quadratic equation.",
+                "required": true
+            }
+        },
+        "example": {
+            "request": "/quadratic?coefficient_a=4&coefficient_b=-8.201&coefficient_c=-5",
+            "response": {
+                "input": {
+                    "coefficient_a": 1,
+                    "coefficient_b": -8,
+                    "coefficient_c": 7
+                },
+                "solution": {
+                    "roots": [
+                        7,
+                        1
+                    ],
+                    "quantity": 2
+                }
+            }
+        }
+    },
+    "POST": {
+        "description": "Solve quadratic equation ( a * x^2 + b * x + c = 0 )",
+        "content-type": "application/json",
+        "parameters": {
+            "coefficient_a": {
+                "type": "number",
+                "description": "Coefficient A of quadratic equation (cannot equals to zero).",
+                "required": true
+            },
+            "coefficient_b": {
+                "type": "number",
+                "description": "Coefficient B of quadratic equation.",
+                "required": true
+            },
+            "coefficient_c": {
+                "type": "number",
+                "description": "Coefficient C of quadratic equation.",
+                "required": true
+            }
+        },
+        "example": {
+            "request": {
+                "coefficient_a": 2,
+                "coefficient_b": 5,
+                "coefficient_c": -19
+            },
+            "response": {
+                "input": {
+                    "coefficient_a": 2,
+                    "coefficient_b": 5,
+                    "coefficient_c": -19
+                },
+                "solution": {
+                    "roots": [
+                        2.0760336739125176,
+                        -4.576033673912518
+                    ],
+                    "quantity": 2
+                }
+            }
+        }
+    }
+}

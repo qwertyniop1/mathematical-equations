@@ -1,0 +1,10 @@
+require_relative './lib/server'
+require_relative './lib/user'
+
+desc 'Seed database'
+task :seed do
+  User.create_indexes
+  User.delete_all
+  user = User.create! name: 'frontend'
+  puts "Create new user '#{user.name}' with token #{user.token}"
+end

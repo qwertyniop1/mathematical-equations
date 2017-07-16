@@ -3,6 +3,7 @@ require 'sinatra/namespace'
 
 require_relative 'multi_route'
 require_relative 'equations'
+require_relative 'user'
 require_relative 'api_description'
 
 set port: 8080
@@ -59,6 +60,22 @@ helpers do
   rescue
     raise_error! :request, 'Invalid request body.'
   end
+
+  def authenticate?
+    token = env['HTTP_AUTHORIZATION']
+    !!User.where(token: token).first
+  end
+end
+
+register do
+  def check(name)
+    condition do
+      raise_error!(
+        :authentication,
+        'Missing or invalid authentication token',
+        401) unless send(name)
+    end
+  end
 end
 
 get ['/', '/api'] do
@@ -101,7 +118,7 @@ namespace '/api/v1' do
     pass
   end
 
-  get_or_post '/linear' do
+  get_or_post '/linear', check: :authenticate? do
     begin
       solution = LinearEquation.new(*@coefficients).solve
     rescue ArgumentError
@@ -144,7 +161,7 @@ namespace '/api/v1' do
     pass
   end
 
-  get_or_post '/quadratic' do
+  get_or_post '/quadratic', check: :authenticate? do
     begin
       solution = QuadraticEquation.new(*@coefficients).solve
     rescue ArgumentError

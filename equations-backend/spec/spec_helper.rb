@@ -15,6 +15,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'rack/test'
+require 'support/factory_girl'
 
 require_relative 'helpers/api_helper'
 

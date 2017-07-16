@@ -5,6 +5,10 @@ gem 'sinatra-namespace'
 
 gem 'rspec', '~> 3.0'
 
+gem 'mongoid'
+
+gem 'factory_girl'
+
 group :development do
   gem 'guard-rspec'
   gem 'rack-test'

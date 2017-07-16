@@ -5,6 +5,19 @@ RSpec.describe 'Server' do
     Sinatra::Application
   end
 
+  before(:all) do
+    @user = FactoryGirl.create(:user)
+  end
+
+  shared_examples_for 'error response' do
+    it 'shoult return JSON with error details' do
+      expect(last_response.status).to eq code
+      expect { JSON.parse(last_response.body) }.not_to raise_error
+      result = JSON.parse(last_response.body)
+      expect(result).to include 'errors'
+    end
+  end
+
   describe 'root url' do
     it 'redirects to current API url' do
       get '/'
@@ -81,98 +94,131 @@ RSpec.describe 'Server' do
     end
 
     describe 'GET request' do
-      context 'with valid data' do
-        it 'should return JSON with equation solution' do
-          get '/api/v1/linear', coefficient_a: 1, coefficient_b: 5
+      context 'with valid authentication token' do
+        context 'with valid data' do
+          it 'should return JSON with equation solution' do
+            get('/api/v1/linear', { coefficient_a: 1, coefficient_b: 5 }, 'HTTP_AUTHORIZATION' => @user.token)
 
-          expect(last_response).to be_ok
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          %w[input solution].each do |property|
-            expect(result).to include property
+            expect(last_response).to be_ok
+            expect { JSON.parse(last_response.body) }.not_to raise_error
+            result = JSON.parse(last_response.body)
+            %w[input solution].each do |property|
+              expect(result).to include property
+            end
           end
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            get '/api/v1/linear', { coefficient_a: 0, coefficient_b: 5 }, 'HTTP_AUTHORIZATION' => @user.token
+          end
+
+          let(:code) { 422 }
+          it_should_behave_like 'error response'
+        end
+      end
+
+      context 'with missing or invalid authentication token' do
+        context 'with valid data' do
+          before do
+            get '/api/v1/linear', coefficient_a: 1, coefficient_b: 5
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            get '/api/v1/linear', coefficient_a: 0, coefficient_b: 5
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
         end
       end
 
       context 'with missing url parameter(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           get '/api/v1/linear', coefficient_a: 1
-
-          expect(last_response.status).to eq 400
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
+
+        let(:code) { 400 }
+        it_should_behave_like 'error response'
       end
 
       context 'with invalid url parameter(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           get '/api/v1/linear', coefficient_a: 1, coefficient_b: 'wrong'
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
+
+        let(:code) { 422 }
+        it_should_behave_like 'error response'
       end
 
-      context 'with zero A coefficient' do
-        it 'shoult return JSON with error details' do
-          get '/api/v1/linear', coefficient_a: 0, coefficient_b: 5
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
-        end
-      end
     end
 
     describe 'POST request' do
-      context 'with valid data' do
-        it 'should return JSON with equation solution' do
-          post_json '/api/v1/linear', coefficient_a: 1, coefficient_b: 5
+      context 'with valid authentication token' do
+        context 'with valid data' do
+          it 'should return JSON with equation solution' do
+            post_json '/api/v1/linear', { coefficient_a: 1, coefficient_b: 5 }, 'HTTP_AUTHORIZATION' => @user.token
 
-          expect(last_response).to be_ok
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          %w[input solution].each do |property|
-            expect(result).to include property
+            expect(last_response).to be_ok
+            expect { JSON.parse(last_response.body) }.not_to raise_error
+            result = JSON.parse(last_response.body)
+            %w[input solution].each do |property|
+              expect(result).to include property
+            end
           end
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            post_json '/api/v1/linear', { coefficient_a: 0, coefficient_b: 5 }, 'HTTP_AUTHORIZATION' => @user.token
+          end
+
+          let(:code) { 422 }
+          it_should_behave_like 'error response'
+        end
+      end
+
+      context 'with missing or invalid authentication token' do
+        context 'with valid data' do
+          before do
+            post_json '/api/v1/linear', coefficient_a: 1, coefficient_b: 5
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            post_json '/api/v1/linear', coefficient_a: 0, coefficient_b: 5
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
         end
       end
 
       context 'with missing JSON field(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           post_json '/api/v1/linear', coefficient_a: 1
-
-          expect(last_response.status).to eq 400
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
+
+        let(:code) { 400 }
+        it_should_behave_like 'error response'
       end
 
       context 'with invalid JSON field(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           post_json '/api/v1/linear', coefficient_a: 1, coefficient_b: 'wrong'
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
-      end
 
-      context 'with zero A coefficient' do
-        it 'shoult return JSON with error details' do
-          post_json '/api/v1/linear', coefficient_a: 0, coefficient_b: 5
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
-        end
+        let(:code) { 422 }
+        it_should_behave_like 'error response'
       end
     end
   end
@@ -200,128 +246,174 @@ RSpec.describe 'Server' do
     end
 
     describe 'GET request' do
-      context 'with valid data' do
-        it 'should return JSON with equation solution' do
-          get '/api/v1/quadratic',
-              coefficient_a: 1,
-              coefficient_b: 5,
-              coefficient_c: -25
+      context 'with valid authentication token' do
+        context 'with valid data' do
+          it 'should return JSON with equation solution' do
+            get '/api/v1/quadratic',
+                { coefficient_a: 1,
+                  coefficient_b: 5,
+                  coefficient_c: -25 },
+                'HTTP_AUTHORIZATION' => @user.token
 
-          expect(last_response).to be_ok
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          %w[input solution].each do |property|
-            expect(result).to include property
+              expect(last_response).to be_ok
+            expect { JSON.parse(last_response.body) }.not_to raise_error
+            result = JSON.parse(last_response.body)
+            %w[input solution].each do |property|
+              expect(result).to include property
+            end
           end
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            get '/api/v1/quadratic',
+                { coefficient_a: 0,
+                  coefficient_b: 5,
+                  coefficient_c: 1 },
+                'HTTP_AUTHORIZATION' => @user.token
+          end
+
+          let(:code) { 422 }
+          it_should_behave_like 'error response'
+        end
+      end
+
+      context 'with missing or invalid authentication token' do
+        context 'with valid data' do
+          before do
+            get '/api/v1/quadratic',
+                coefficient_a: 1,
+                coefficient_b: 5,
+                coefficient_c: -25
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            get '/api/v1/quadratic',
+                coefficient_a: 0,
+                coefficient_b: 5,
+                coefficient_c: 1
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
         end
       end
 
       context 'with missing url parameter(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           get '/api/v1/quadratic', coefficient_a: 1, coefficient_b: -5
-
-          expect(last_response.status).to eq 400
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
+
+        let(:code) { 400 }
+        it_should_behave_like 'error response'
       end
 
       context 'with invalid url parameter(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           get '/api/v1/quadratic',
               coefficient_a: 1,
               coefficient_b: 'wrong',
               coefficient_c: 0
 
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
-        end
-      end
-
-      context 'with zero A coefficient' do
-        it 'shoult return JSON with error details' do
-          get '/api/v1/quadratic',
-              coefficient_a: 0,
-              coefficient_b: 5,
-              coefficient_c: 1
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
+          let(:code) { 422 }
+          it_should_behave_like 'error response'
         end
       end
     end
 
     describe 'POST request' do
-      context 'with valid data' do
-        it 'should return JSON with equation solution' do
-          post_json '/api/v1/quadratic',
-                    coefficient_a: 1,
-                    coefficient_b: 5,
-                    coefficient_c: -20
+      context 'with valid authentication token' do
+        context 'with valid data' do
+          it 'should return JSON with equation solution' do
+            post_json '/api/v1/quadratic',
+                      { coefficient_a: 1,
+                        coefficient_b: 5,
+                        coefficient_c: -20 },
+                      'HTTP_AUTHORIZATION' => @user.token
 
-          expect(last_response).to be_ok
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          %w[input solution].each do |property|
-            expect(result).to include property
+            expect(last_response).to be_ok
+            expect { JSON.parse(last_response.body) }.not_to raise_error
+            result = JSON.parse(last_response.body)
+            %w[input solution].each do |property|
+              expect(result).to include property
+            end
           end
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            post_json '/api/v1/quadratic',
+                      { coefficient_a: 0,
+                        coefficient_b: 5,
+                        coefficient_c: 5 },
+                      'HTTP_AUTHORIZATION' => @user.token
+          end
+
+          let(:code) { 422 }
+          it_should_behave_like 'error response'
+        end
+      end
+
+      context 'with missing or invalid authentication token' do
+        context 'with valid data' do
+          before do
+            post_json '/api/v1/quadratic',
+                      coefficient_a: 1,
+                      coefficient_b: 5,
+                      coefficient_c: -20
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
+        end
+
+        context 'with zero A coefficient' do
+          before do
+            post_json '/api/v1/quadratic',
+                      coefficient_a: 0,
+                      coefficient_b: 5,
+                      coefficient_c: 5
+          end
+
+          let(:code) { 401 }
+          it_should_behave_like 'error response'
         end
       end
 
       context 'with missing JSON field(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           post_json '/api/v1/quadratic', coefficient_a: 1
-
-          expect(last_response.status).to eq 400
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
+
+        let(:code) { 400 }
+        it_should_behave_like 'error response'
       end
 
       context 'with invalid JSON field(s)' do
-        it 'shoult return JSON with error details' do
+        before do
           post_json '/api/v1/quadratic',
                     coefficient_a: 1,
                     coefficient_b: -5,
                     coefficient_c: 'wrong'
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
         end
-      end
 
-      context 'with zero A coefficient' do
-        it 'shoult return JSON with error details' do
-          post_json '/api/v1/quadratic',
-                    coefficient_a: 0,
-                    coefficient_b: 5,
-                    coefficient_c: 5
-
-          expect(last_response.status).to eq 422
-          expect { JSON.parse(last_response.body) }.not_to raise_error
-          result = JSON.parse(last_response.body)
-          expect(result).to include 'errors'
-        end
+        let(:code) { 422 }
+        it_should_behave_like 'error response'
       end
     end
   end
 
   describe 'invalid url' do
-    it 'should return JSON with error message' do
+    before do
       get '/unexisting/url'
-
-      expect(last_response.status).to eq 404
-      expect { JSON.parse(last_response.body) }.not_to raise_error
-      result = JSON.parse(last_response.body)
-      expect(result).to include 'errors'
     end
+
+    let(:code) { 404 }
+    it_should_behave_like 'error response'
   end
 end

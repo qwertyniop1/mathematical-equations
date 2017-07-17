@@ -6,5 +6,7 @@ task :seed do
   User.create_indexes
   User.delete_all
   user = User.create! name: 'frontend'
-  puts "Create new user '#{user.name}' with token #{user.token}"
+  puts "Create new user '#{user.name}'"
+  puts 'REMEMBER YOUR API KEY!'
+  puts user.token
 end

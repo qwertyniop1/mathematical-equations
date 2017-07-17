@@ -6,8 +6,8 @@
       - @result.each_with_index do |root, index|
         tr
           td.right
-            = @result.size > 1 ? "`x#{index + 1}`" : '`x`'
+            = @result.size > 1 ? "`x_#{index + 1}`" : '`x`'
           td
-            = "`#{root.round(10)}`"
+            = "`#{trim_float(root.round(10))}`"
   - else
     p.text No roots

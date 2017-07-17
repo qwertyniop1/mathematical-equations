@@ -3,7 +3,10 @@ class EquationsAPI
   base_uri 'lvh.me:8080'
 
   def initialize(coefficients = {})
-    @options = { query: coefficients }
+    @options = {
+      query: coefficients,
+      headers: { 'Authorization': Figaro.env.api_key }
+    }
   end
 
   def linear

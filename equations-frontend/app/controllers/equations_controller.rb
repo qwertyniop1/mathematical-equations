@@ -9,7 +9,13 @@ class EquationsController < ApplicationController
 
     respond_to do |format|
       format.html { render :linear }
-      format.js { render :solve_equation }
+      format.js do
+        if @result.nil?
+          render :show_error, status: 500
+        else
+          render :solve_equation
+        end
+      end
     end
   end
 
@@ -21,7 +27,13 @@ class EquationsController < ApplicationController
 
     respond_to do |format|
       format.html { render :quadratic }
-      format.js { render :solve_equation }
+      format.js do
+        if @result.nil?
+          render :show_error, status: 500
+        else
+          render :solve_equation
+        end
+      end
     end
   end
 
